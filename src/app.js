@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const rateLimit = require('express-rate-limit');
 const dotenv = require('dotenv');
+const authRoutes = require('./routes/auth.routes');
+
 
 // Load environment variables
 dotenv.config();
@@ -43,5 +45,7 @@ app.use('/api', limiter);
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'success', message: 'API is healthy' });
 });
+
+app.use('/api/auth', authRoutes);
 
 module.exports = app;
